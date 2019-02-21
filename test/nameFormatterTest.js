@@ -22,15 +22,52 @@ describe('invert name', function() {
   it('should return a name when passed a name with leading and/or trailing spaces', function() {
     const nameFormatter = new NameFormatter();
     const inputName = "  name ";
-    const expectedOutput = ("name");
+    const expectedOutput = "name";
     assert.equal(nameFormatter.invertName(inputName), expectedOutput);
   });
 
   it('should return lastname, firstname when passed firstname lastname', function() {
     const nameFormatter = new NameFormatter();
     const inputName = "carlo cadiz";
-    const expectedOutput = ("cadiz, carlo");
+    const expectedOutput = "cadiz, carlo";
     assert.equal(nameFormatter.invertName(inputName), expectedOutput);
   });
+
+  it('should return lastname, firstname when passed firstname lastname with leading and/or trailing spaces', function() {
+    const nameFormatter = new NameFormatter();
+    const inputName = "  carlo cadiz   ";
+    const expectedOutput = "cadiz, carlo";
+    assert.equal(nameFormatter.invertName(inputName), expectedOutput);
+  });
+
+  it('should return an empty string when passed a single honorific', function() {
+    const nameFormatter = new NameFormatter();
+    const inputName = "Mr. ";
+    const expectedOutput = "";
+    assert.equal(nameFormatter.invertName(inputName), expectedOutput);
+  });
+
+  it('should return an honorific and first-name when passed an honorific and first-name', function() {
+    const nameFormatter = new NameFormatter();
+    const inputName = "Mr. Carlo ";
+    const expectedOutput = "Mr. Carlo";
+    assert.equal(nameFormatter.invertName(inputName), expectedOutput);
+  });
+
+  it('should return an honorific last-name, first-name when passed an honorific first-name last-name', function() {
+    const nameFormatter = new NameFormatter();
+    const inputName = "Mr. Carlo Cadiz";
+    const expectedOutput = "Mr. Cadiz, Carlo";
+    assert.equal(nameFormatter.invertName(inputName), expectedOutput);
+  });
+
+  it('should return an honorific last-name, first-name when passed an honorific first-name last-name with leading and/or trailing spaces', function() {
+    const nameFormatter = new NameFormatter();
+    const inputName = " Mr. Carlo Cadiz  ";
+    const expectedOutput = "Mr. Cadiz, Carlo";
+    assert.equal(nameFormatter.invertName(inputName), expectedOutput);
+  });
+
+
 
 });
