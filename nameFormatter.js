@@ -5,9 +5,14 @@ class NameFormatter {
 
   invertName(name) {
 
+    if (name === undefined) {
+      throw new Error("No Name!");
+    }
+
     if (name === '') {
       return '';
     }
+
     const newName = name.trim();
     const splitName = newName.split(" ");
     let removeHonor = [];
@@ -17,17 +22,14 @@ class NameFormatter {
     });
 
 
-    if (honor !== undefined && splitName.length === 1){
+    if (honor && splitName.length === 1){
       return '';
     }
-    else if(honor !== undefined && splitName.length === 2){
+    else if(honor && splitName.length === 2){
       return newName;
     }
-    else if (honor !== undefined){
+    else if (honor){
        splitName.shift();
-    }
-    else{
-      honor = "";
     }
 
     if (honor){

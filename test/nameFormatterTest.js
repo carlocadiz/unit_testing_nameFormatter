@@ -1,5 +1,6 @@
 const chai = require('chai');
 const assert = chai.assert;
+const expect = chai.expect;
 
 const NameFormatter = require('../nameFormatter');
 
@@ -68,6 +69,9 @@ describe('invert name', function() {
     assert.equal(nameFormatter.invertName(inputName), expectedOutput);
   });
 
-
-
+  it("should throw an error when there is no name", function() {
+    const nameFormatter = new NameFormatter();
+    expect(function(){ nameFormatter.invertName();
+    }).to.throw('No Name!');
+  });
 });
