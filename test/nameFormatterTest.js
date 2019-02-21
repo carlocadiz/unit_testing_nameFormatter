@@ -19,4 +19,18 @@ describe('invert name', function() {
     assert.equal(nameFormatter.invertName(inputName), expectedOutput);
   });
 
+  it('should return a name when passed a name with leading and/or trailing spaces', function() {
+    const nameFormatter = new NameFormatter();
+    const inputName = "  name ";
+    const expectedOutput = ("name");
+    assert.equal(nameFormatter.invertName(inputName), expectedOutput);
+  });
+
+  it('should return lastname, firstname when passed firstname lastname', function() {
+    const nameFormatter = new NameFormatter();
+    const inputName = "carlo cadiz";
+    const expectedOutput = ("cadiz, carlo");
+    assert.equal(nameFormatter.invertName(inputName), expectedOutput);
+  });
+
 });
